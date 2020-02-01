@@ -4,7 +4,7 @@ import axios from 'axios'
 import './index.css';
 
 export default function App() {
-    const [pokedexm, setPokedex] = useState([]);
+    const [pokedex, setPokedex] = useState([]);
     const [wildPokemon, setWildPokemon] = useState({});
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export default function App() {
     const pokeId = () =>{
         const min = Math.ceil(1);
         const max = Math.floor(151);
-        return Math.floor(Math.random() + (max - min + 1)) + min
+        return Math.floor(Math.random() * (max - min + 1)) + min
     }
 
     const encounterWildPokemon = () =>{
@@ -24,6 +24,10 @@ export default function App() {
         })
     }
 
+    const releasePokemon = id => {
+        setPokedex(state => state.filter(p => p.id != id))
+      }
+      
     const catchPokemon = (pokemon) => {
         setPokedex(state => {
             const monExists = (state.filter(p => pokemon.id == p.id).length > 0);
@@ -52,15 +56,15 @@ export default function App() {
             <button className="catch-btn" onClick={() => catchPokemon(wildPokemon)}>Pegar!</button>
         </section>
 
-        <section className='pokedex'>
-            <h2>Pokédex</h2>
-            <div className="pokedex-list">
-            {pokedexm.map(pokemon => (
-                <div className="pokemon" key={pokemon.id}>
-                    <img className="sprite" src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + wildPokemon.id + ".png"} />
-                    <h3 className="pokemon-name">{pokemon.name}</h3>
-                    <button className="remove">&times;</button>
-                </div>
+        <section className="pokedex">
+          <h2>Pokédex</h2>
+          <div className="pokedex-list">
+            {pokedex.map(pokemon => (
+              <div className="pokemon" key={pokemon.id}>
+                <img src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + pokemon.id + ".png"} className="sprite" />
+                <h3 className="pokemon-name">{pokemon.name}</h3>
+                <button className="remove" onClick={() => releasePokemon(pokemon.id)}>&times;</button>
+              </div>
             ))}
             </div>
         </section>

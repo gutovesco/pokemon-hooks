@@ -91,25 +91,46 @@ header{
 .wild-pokemon .catch-btn:active{
   background: #f7a800;
 }
-.pokedex{
+.pokedex {
   flex: 1;
-  padding: 115px;
+  padding: 15px;
   display: flex;
   flex-flow: column;
   overflow: scroll;
 }
-.pokemon-list{
+
+.pokedex-list {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 15px;
 }
-.pokemon-list .pokemon{
+
+.pokedex-list .pokemon {
   position: relative;
   display: flex;
   flex-flow: column;
   min-height: 150px;
   padding: 15px;
-  background: #f3f3f3;
+  background: #F3F3F3;
+} 
+
+.pokedex-list .pokemon .remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  outline: none;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  background: firebrick;
+  color: #F3F3F3;
+  font-size: 28px;
+  cursor: pointer;
+
 }
 
+.pokedex-list .pokemon .sprite {
+  width: 100%;
+}
