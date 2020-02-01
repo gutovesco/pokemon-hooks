@@ -4,7 +4,7 @@ import axios from 'axios'
 import './index.css';
 
 export default function App() {
-    const [pokedexm, setPokedex0] = useState([]);
+    const [pokedexm, setPokedex] = useState([]);
     const [wildPokemon, setWildPokemon] = useState({});
 
     useEffect(() => {
@@ -23,6 +23,21 @@ export default function App() {
             setWildPokemon(response.data)
         })
     }
+
+    const catchPokemon = (pokemon) => {
+        setPokedex(state => {
+            const monExists = (state.filter(p => pokemon.id == p.id).length > 0);
+
+            if (!monExists){
+                state = [...state, pokemon]
+                state.sort(function (a,b){
+                    return a.id - b.id
+                })
+            }
+            return state
+        })
+        encounterWildPokemon()
+    }
     return (
       <div className="app-wrapper">
         <header>
@@ -34,7 +49,7 @@ export default function App() {
             <h2>Encontro com Pokemon selvagem</h2>
             <img src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + wildPokemon.id + ".png"} className="sprite" />
             <h3>{wildPokemon.name}</h3>
-            <button className="catch-btn">Catch!</button>
+            <button className="catch-btn" onClick={() => catchPokemon(wildPokemon)}>Pegar!</button>
         </section>
 
         <section className='pokedex'>
