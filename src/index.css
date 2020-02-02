@@ -133,4 +133,5 @@ header{
 
 .pokedex-list .pokemon .sprite {
   width: 100%;
+  cursor: pointer;
 }

@@ -25,12 +25,12 @@ export default function App() {
     }
 
     const releasePokemon = id => {
-        setPokedex(state => state.filter(p => p.id != id))
+        setPokedex(state => state.filter(p => p.id !== id))
       }
       
     const catchPokemon = (pokemon) => {
         setPokedex(state => {
-            const monExists = (state.filter(p => pokemon.id == p.id).length > 0);
+            const monExists = (state.filter(p => pokemon.id === p.id).length > 0);
 
             if (!monExists){
                 state = [...state, pokemon]
